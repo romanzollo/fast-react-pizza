@@ -6,7 +6,6 @@ import MenuItem from './MenuItem';
 function Menu() {
     // извлекаем данные с помощью хука useLoaderData (react-router v6.4)
     const menu = useLoaderData();
-    console.log(menu);
 
     return (
         <ul>
