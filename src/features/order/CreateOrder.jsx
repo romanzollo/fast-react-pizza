@@ -8,21 +8,21 @@ const isValidPhone = (str) =>
 
 const fakeCart = [
     {
-        coffeeId: 12,
+        pizzaId: 12,
         name: 'Mediterranean',
         quantity: 2,
         unitPrice: 16,
         totalPrice: 32,
     },
     {
-        coffeeId: 6,
+        pizzaId: 6,
         name: 'Vegetale',
         quantity: 1,
         unitPrice: 13,
         totalPrice: 13,
     },
     {
-        coffeeId: 11,
+        pizzaId: 11,
         name: 'Spinach and Mushroom',
         quantity: 1,
         unitPrice: 15,

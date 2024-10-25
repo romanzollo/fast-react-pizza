@@ -15,21 +15,21 @@ const order = {
     estimatedDelivery: '2027-04-25T10:00:00',
     cart: [
         {
-            coffeeId: 7,
+            pizzaId: 7,
             name: 'Napoli',
             quantity: 3,
             unitPrice: 16,
             totalPrice: 48,
         },
         {
-            coffeeId: 5,
+            pizzaId: 5,
             name: 'Diavola',
             quantity: 2,
             unitPrice: 16,
             totalPrice: 32,
         },
         {
-            coffeeId: 3,
+            pizzaId: 3,
             name: 'Romana',
             quantity: 1,
             unitPrice: 15,
@@ -77,7 +77,7 @@ function Order() {
             </div>
 
             <div>
-                <p>Price coffee: {formatCurrency(orderPrice)}</p>
+                <p>Price pizza: {formatCurrency(orderPrice)}</p>
                 {priority && (
                     <p>Price priority: {formatCurrency(priorityPrice)}</p>
                 )}

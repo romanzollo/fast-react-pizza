@@ -1,7 +1,7 @@
 import { formatCurrency } from '../../utils/helpers';
 
 function CartItem({ item }) {
-    const { coffeeId, name, quantity, totalPrice } = item;
+    const { pizzaId, name, quantity, totalPrice } = item;
 
     return (
         <li>
