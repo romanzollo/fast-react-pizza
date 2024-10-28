@@ -1,15 +1,19 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useRouteError } from 'react-router-dom';
 
-function NotFound() {
-  const navigate = useNavigate();
+function Error() {
+    const navigate = useNavigate();
 
-  return (
-    <div>
-      <h1>Something went wrong 😢</h1>
-      <p>%MESSAGE%</p>
-      <button onClick={() => navigate(-1)}>&larr; Go back</button>
-    </div>
-  );
+    // встроенный хук (React Router v6.4) который позволяет получить информацию об ошибке
+    const error = useRouteError();
+    console.log(error);
+
+    return (
+        <div>
+            <h1>Something went wrong 😢</h1>
+            <p>{error.data || error.message}</p>
+            <button onClick={() => navigate(-1)}>&larr; Go back</button>
+        </div>
+    );
 }
 
-export default NotFound;
+export default Error;

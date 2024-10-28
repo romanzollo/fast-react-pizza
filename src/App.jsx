@@ -6,11 +6,14 @@ import Cart from './features/cart/Cart';
 import CreateOrder from './features/order/CreateOrder';
 import Order from './features/order/Order';
 import AppLayout from './ui/AppLayout';
+import Error from './ui/Error';
 
 // Only for React Router since vers. 6.4
 const router = createBrowserRouter([
     {
         element: <AppLayout />,
+        errorElement: <Error />, // добавляем обработчик ошибок (React Router v6.4)
+
         children: [
             {
                 path: '/',
@@ -19,6 +22,8 @@ const router = createBrowserRouter([
             {
                 path: '/menu',
                 element: <Menu />,
+                errorElement: <Error />, // добавляем обработчик ошибок (React Router v6.4)
+
                 loader: menuLoader, // добавляем лоадер
             },
             {

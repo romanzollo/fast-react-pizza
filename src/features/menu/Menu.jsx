@@ -16,7 +16,7 @@ function Menu() {
     );
 }
 
-// создаем функцию loader для загрузки данных (react-router v6.4)
+// создаем функцию loader для загрузки данных через react-router (react-router v6.4)
 export async function loader() {
     const menu = await getMenu();
 
