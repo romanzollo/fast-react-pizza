@@ -4,7 +4,7 @@ import { getMenu } from '../../services/apiRestaurant';
 import MenuItem from './MenuItem';
 
 function Menu() {
-    // извлекаем данные с помощью хука useLoaderData (react-router v6.4)
+    // извлекаем данные из loader с помощью хука useLoaderData (react-router v6.4)
     const menu = useLoaderData();
 
     return (

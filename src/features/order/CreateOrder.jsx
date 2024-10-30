@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Form, redirect } from 'react-router-dom';
+import { Form, redirect, useActionData, useNavigation } from 'react-router-dom';
 import { createOrder } from '../../services/apiRestaurant';
 
 // https://uibakery.io/regex-library/phone-number
@@ -33,6 +33,15 @@ const fakeCart = [
 ];
 
 function CreateOrder() {
+    // хук useNavigation (react-router v6.4) позволяет получить информацию о текущем состоянии навигации в приложении (loading, idle, submitting и т.д.)
+    const navigation = useNavigation();
+
+    // используем состояние глобальной навигации
+    const isSubmitting = navigation.state === 'submitting';
+
+    // извлекаем данные из action
+    const formErrors = useActionData();
+
     // const [withPriority, setWithPriority] = useState(false);
     const cart = fakeCart;
 
@@ -55,6 +64,7 @@ function CreateOrder() {
                     <label>Phone number</label>
                     <div>
                         <input type="tel" name="phone" required />
+                        {formErrors?.phone && <p>{formErrors.phone}</p>}
                     </div>
                 </div>
 
@@ -85,7 +95,9 @@ function CreateOrder() {
                         name="cart"
                         value={JSON.stringify(cart)}
                     />
-                    <button>Order now</button>
+                    <button disabled={isSubmitting}>
+                        {isSubmitting ? 'Placing order...' : 'Order now'}
+                    </button>
                 </div>
             </Form>
         </div>
@@ -106,6 +118,18 @@ export async function action({ request }) {
         priority: data.priority === 'on', // true or false
     };
 
+    // валидация данных
+    const errors = {};
+
+    // валидация телефона
+    if (!isValidPhone(order.phone))
+        errors.phone =
+            'Please give us your correct phone number. We need it to contact you';
+
+    // проверка на наличие ошибок
+    if (Object.keys(errors).length > 0) return errors;
+
+    // если все в порядке, то создаем новый заказ и перенаправляем на страницу с новым заказом
     // создаем заказ с помощью функции createOrder из apiRestaurant
     const newOrder = await createOrder(order);
 
@@ -114,7 +138,7 @@ export async function action({ request }) {
     // redirect функция предоставленная React Router
     // которая создают новый запрос или новый ответ
     // и перенаправляет на другой URL
-    // так как хуки (useNavigate) можно использовать только внутри компонентов
+    // в данном случае  нельзя использовать useNavigate, так как хуки (useNavigate) можно использовать только внутри компонентов
     return redirect(`/order/${newOrder.id}`);
 }
 
