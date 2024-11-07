@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Form, redirect, useActionData, useNavigation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { createOrder } from '../../services/apiRestaurant';
 import Button from '../../ui/Button';
@@ -44,6 +45,9 @@ function CreateOrder() {
   // извлекаем данные из action
   const formErrors = useActionData();
 
+  // извлекаем данные глобального состояния из стора
+  const username = useSelector((state) => state.user.username);
+
   // const [withPriority, setWithPriority] = useState(false);
   const cart = fakeCart;
 
@@ -59,7 +63,13 @@ function CreateOrder() {
       <Form method="POST">
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
           <label className="sm:basis-40">First Name</label>
-          <input className="input grow" type="text" name="customer" required />
+          <input
+            defaultValue={username}
+            className="input grow"
+            type="text"
+            name="customer"
+            required
+          />
         </div>
 
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
