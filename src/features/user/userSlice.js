@@ -17,3 +17,8 @@ const userSlice = createSlice({
 export const { updateUsername } = userSlice.actions;
 
 export default userSlice.reducer;
+
+/* --- Selectors ---  */
+// функции которые возвращаютт часть глобального состояния
+// начинать эти функции селектора с get согласно стандарту Redux
+export const getUsername = (state) => state.user.username;

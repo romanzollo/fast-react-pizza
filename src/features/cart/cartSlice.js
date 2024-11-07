@@ -45,6 +45,9 @@ export default cartSlice.reducer;
 /* --- Selectors ---  */
 // функции которые возвращаютт часть глобального состояния
 // начинать эти функции селектора с get согласно стандарту Redux
+
+export const getCart = (state) => state.cart.cart;
+
 export const getTotalCartQuantity = (state) =>
   state.cart.cart.reduce((sum, item) => sum + item.quantity, 0);
 
