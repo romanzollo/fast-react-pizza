@@ -5,7 +5,7 @@ const initialState = {
 
   cart: [
     {
-      id: 1,
+      pizzaId: 1,
       name: 'Romana',
       quantity: 2,
       unitPrice: 16,
@@ -24,16 +24,16 @@ const cartSlice = createSlice({
     },
     deleteItem: (state, action) => {
       // payload = id
-      state.cart = state.cart.filter((item) => item.id !== action.payload);
+      state.cart = state.cart.filter((item) => item.pizzaId !== action.payload);
     },
     increaseItemQuantity: (state, action) => {
       // payload = id
-      const item = state.cart.find((item) => item.id === action.payload);
+      const item = state.cart.find((item) => item.pizzaId === action.payload);
       item.quantity++;
     },
     decreaseItemQuantity: (state, action) => {
       // payload = id
-      const item = state.cart.find((item) => item.id === action.payload);
+      const item = state.cart.find((item) => item.pizzaId === action.payload);
       item.quantity--;
     },
     clearCart: (state) => {
