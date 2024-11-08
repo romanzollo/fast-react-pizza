@@ -54,5 +54,8 @@ export const getTotalCartQuantity = (state) =>
 export const getTotalCartPrice = (state) =>
   state.cart.cart.reduce((sum, item) => sum + item.unitPrice, 0);
 
+export const getCurrentQuantityById = (id) => (state) =>
+  state.cart.cart.find((item) => item.pizzaId === id)?.quantity ?? 0;
+
 // В больших проектах рекомендуется использовать reselect (library)
 // для эффективного использования селекторов и производительности
