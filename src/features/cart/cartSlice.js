@@ -20,11 +20,22 @@ const cartSlice = createSlice({
       // payload = id
       const item = state.cart.find((item) => item.pizzaId === action.payload);
       item.quantity++;
+
+      // вычисляем общую цену
+      item.totalPrice = item.unitPrice * item.quantity;
     },
     decreaseItemQuantity: (state, action) => {
       // payload = id
       const item = state.cart.find((item) => item.pizzaId === action.payload);
       item.quantity--;
+
+      // вычисляем общую цену
+      item.totalPrice = item.unitPrice * item.quantity;
+
+      // удаляем товар из состояния(корзины) если его количество равно 0
+      // caseReducers - встроенный объект в созданном нами cartSlice с помощью createSlice в котором храняться все редюсеры которые мы создали
+      // (используем этот 'трюк' чтобы не писать удаление вручную заново как в редюсере deleteItem)
+      if (item.quantity === 0) cartSlice.caseReducers.deleteItem(state, action);
     },
     clearCart: (state) => {
       state.cart = [];
@@ -52,9 +63,11 @@ export const getTotalCartQuantity = (state) =>
   state.cart.cart.reduce((sum, item) => sum + item.quantity, 0);
 
 export const getTotalCartPrice = (state) =>
-  state.cart.cart.reduce((sum, item) => sum + item.unitPrice, 0);
+  state.cart.cart.reduce((sum, item) => sum + item.totalPrice, 0);
 
 // ?? - проверка значения на undefined и null (оператор NULLISH COALESCING)
+// если значение еще не определено, то возвращается 0
+// чтобы в объекте cart.quantity не было undefined
 export const getCurrentQuantityById = (id) => (state) =>
   state.cart.cart.find((item) => item.pizzaId === id)?.quantity ?? 0;
 
