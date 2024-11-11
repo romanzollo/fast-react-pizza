@@ -1,6 +1,7 @@
 // Test ID: IIDSAT
 
-import { useLoaderData } from 'react-router-dom';
+import { useFetcher, useLoaderData } from 'react-router-dom';
+
 import { getOrder } from '../../services/apiRestaurant';
 import {
   calcMinutesLeft,
@@ -9,9 +10,21 @@ import {
 } from '../../utils/helpers';
 
 import OrderItem from './OrderItem';
+import { useEffect } from 'react';
 
 function Order() {
   const order = useLoaderData();
+
+  // чтобы вызвать загрузчик вне навигации или вызвать действие (и получить данные на странице) без изменения URL-адреса.
+  const fetcher = useFetcher();
+
+  useEffect(
+    function () {
+      // получаем данные из '/menu' через fetcher
+      if (!fetcher.data && fetcher.state === 'idle') fetcher.load('/menu');
+    },
+    [fetcher],
+  );
 
   // Everyone can search for all orders, so for privacy reasons we're gonna gonna exclude names or address, these are only for the restaurant staff
   const {
@@ -58,7 +71,16 @@ function Order() {
 
       <ul className="divide-y divide-stone-200 border-b border-t">
         {cart.map((item) => (
-          <OrderItem item={item} key={item.pizzaId} />
+          <OrderItem
+            item={item}
+            key={item.pizzaId}
+            isLoadingIngredients={fetcher.state === 'loading'}
+            // передаем данные об ингредиентах полученные из страницы '/menu'(не переходя на саму страницу) при помощи через fetcher (react-router v6.4)
+            ingredients={
+              fetcher.data?.find((el) => el.id === item.pizzaId).ingredients ??
+              [] // если ингредиенты еще не загрузились, то возвращаем пустой массив чтобы не было ошибки
+            }
+          />
         ))}
       </ul>
 

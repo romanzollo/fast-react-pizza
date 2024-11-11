@@ -54,7 +54,7 @@ export const {
 export default cartSlice.reducer;
 
 /* --- Selectors ---  */
-// функции которые возвращаютт часть глобального состояния
+// функции которые возвращают часть глобального состояния
 // начинать эти функции селектора с get согласно стандарту Redux
 
 export const getCart = (state) => state.cart.cart;
