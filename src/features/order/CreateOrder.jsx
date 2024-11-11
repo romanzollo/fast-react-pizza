@@ -7,7 +7,7 @@ import Button from '../../ui/Button';
 import { clearCart, getCart, getTotalCartPrice } from '../cart/cartSlice';
 import store from '../../store';
 import { formatCurrency } from '../../utils/helpers';
-import { fetchAdress } from '../user/userSlice';
+import { fetchAddress } from '../user/userSlice';
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
@@ -106,7 +106,7 @@ function CreateOrder() {
                 disabled={isLoadingAddress}
                 onClick={(e) => {
                   e.preventDefault();
-                  dispatch(fetchAdress());
+                  dispatch(fetchAddress());
                 }}
               >
                 Get Position

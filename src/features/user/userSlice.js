@@ -9,8 +9,8 @@ function getPosition() {
 
 // THUNK - async action creator (redux-toolkit)
 // при создании THUNK функции не использовать названия с 'get' т.к. 'get' зарезервирован для селекторов(которые находятся в самом низу данного слайса) согласно стандарту Redux
-export const fetchAdress = createAsyncThunk(
-  'user/fetchAdress',
+export const fetchAddress = createAsyncThunk(
+  'user/fetchAddress',
   async function () {
     // 1) We get the user's geolocation position
     const positionObj = await getPosition();
@@ -49,16 +49,16 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
-      .addCase(fetchAdress.pending, (state, action) => {
+      .addCase(fetchAddress.pending, (state, action) => {
         state.status = 'loading';
       })
-      .addCase(fetchAdress.fulfilled, (state, action) => {
+      .addCase(fetchAddress.fulfilled, (state, action) => {
         state.status = 'idle';
 
         state.position = action.payload.position;
         state.address = action.payload.address;
       })
-      .addCase(fetchAdress.rejected, (state, action) => {
+      .addCase(fetchAddress.rejected, (state, action) => {
         state.status = 'error';
 
         state.error =
