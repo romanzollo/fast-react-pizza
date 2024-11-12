@@ -1,9 +1,13 @@
-# Fast React App
+# Fast React Pizza App
 
-<!-- <img src="screenshot-1.png" width="1200px"/>
-<img src="screenshot-2.png" width="800px"/>
-<img src="screenshot-3.png" width="800px"/>
-<img src="screenshot-4.png" width="800px"/> -->
+<img src="screenshot-1.png" width="500px"/>
+<img src="screenshot-2.png" width="500px"/>
+<img src="screenshot-3.png" width="500px"/>
+<img src="screenshot-4.png" width="500px"/>
+<img src="screenshot-5.png" width="500px"/>
+<img src="screenshot-6.png" width="500px"/>
+<img src="screenshot-7.png" width="500px"/>
+<img src="screenshot-8.png" width="500px"/>
 
 ## Tools used:
 
@@ -13,6 +17,7 @@
 - TailwindCSS
 - Mobile First
 - useNavigation Hook
+- Redux Thunk middleware (createAsyncThunk)
 - Geolocation API
 - useFetcher Hook (react-router v6.4)
 

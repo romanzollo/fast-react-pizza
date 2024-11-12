@@ -100,7 +100,7 @@ function CreateOrder() {
 
           {/* убираем кнопку после получения координат */}
           {!position.latitude && !position.longitude && (
-            <span className="absolute right-[3px] top-[35px] z-40 sm:top-[3px] md:top-[5px]">
+            <span className="absolute  right-[5px] top-[35px] z-40 sm:top-[3px] md:top-[5px]">
               <Button
                 type="small"
                 disabled={isLoadingAddress}

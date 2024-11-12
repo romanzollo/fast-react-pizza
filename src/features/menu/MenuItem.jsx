@@ -26,7 +26,7 @@ function MenuItem({ pizza }) {
   }
 
   return (
-    <li className="flex gap-4 py-2">
+    <li className="flex gap-2 py-2 sm:gap-4">
       <img
         src={imageUrl}
         alt={name}
@@ -48,7 +48,7 @@ function MenuItem({ pizza }) {
 
           {/* отображаем либо кнопку "Add to cart", либо "Delete" */}
           {isInCart && (
-            <div className="flex items-center gap-3 sm:gap-8">
+            <div className="flex items-center gap-1 sm:gap-8">
               <UpdateItemQuantity
                 pizzaId={id}
                 currentQuantity={currentQuantity}
