@@ -1,6 +1,7 @@
 // Test ID: IIDSAT
 
 import { useFetcher, useLoaderData } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import { getOrder } from '../../services/apiRestaurant';
 import {
@@ -10,18 +11,21 @@ import {
 } from '../../utils/helpers';
 
 import OrderItem from './OrderItem';
-import { useEffect } from 'react';
 
 function Order() {
   const order = useLoaderData();
 
   // чтобы вызвать загрузчик вне навигации или вызвать действие (и получить данные на странице) без изменения URL-адреса.
+  // fetcher - это объект, который позволяет нам получать данные которые из другого маршрута (другой страницы)
+  // с помощью useFetcher можно извлекать и изменять данные не переходя на другую страницу!
   const fetcher = useFetcher();
 
+  // сразу после монтирования компонента извлекаем данные из страницы '/menu'
   useEffect(
     function () {
-      // получаем данные из '/menu' через fetcher
-      if (!fetcher.data && fetcher.state === 'idle') fetcher.load('/menu');
+      // извлекаем данные если они еще не получены
+      // fetcher как и при использовании useNavigation может находиться в разных состояниях (loading, idle, submitting)
+      if (!fetcher.data && fetcher.state === 'idle') fetcher.load('/menu'); // получаем данные из '/menu' через fetcher.load и сохраняем в объекте fetcher
     },
     [fetcher],
   );
@@ -75,7 +79,7 @@ function Order() {
             item={item}
             key={item.pizzaId}
             isLoadingIngredients={fetcher.state === 'loading'}
-            // передаем данные об ингредиентах полученные из страницы '/menu'(не переходя на саму страницу) при помощи через fetcher (react-router v6.4)
+            // передаем данные об ингредиентах полученные из страницы '/menu'(не переходя на саму страницу) при помощи fetcher (react-router ver.6)
             ingredients={
               fetcher.data?.find((el) => el.id === item.pizzaId).ingredients ??
               [] // если ингредиенты еще не загрузились, то возвращаем пустой массив чтобы не было ошибки
