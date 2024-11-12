@@ -11,6 +11,7 @@ import {
 } from '../../utils/helpers';
 
 import OrderItem from './OrderItem';
+import UpdateOrder from './UpdateOrder';
 
 function Order() {
   const order = useLoaderData();
@@ -25,7 +26,7 @@ function Order() {
     function () {
       // извлекаем данные если они еще не получены
       // fetcher как и при использовании useNavigation может находиться в разных состояниях (loading, idle, submitting)
-      if (!fetcher.data && fetcher.state === 'idle') fetcher.load('/menu'); // получаем данные из '/menu' через fetcher.load и сохраняем в объекте fetcher
+      if (!fetcher.data && fetcher.state === 'idle') fetcher.load('/menu'); // Загружает данные из загрузчика маршрутов - '/menu' через fetcher.load и сохраняем в объекте fetcher
     },
     [fetcher],
   );
@@ -101,6 +102,8 @@ function Order() {
           To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}
         </p>
       </div>
+
+      {!priority && <UpdateOrder order={order} />}
     </div>
   );
 }

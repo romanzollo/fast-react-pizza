@@ -14,5 +14,6 @@
 - Mobile First
 - useNavigation Hook
 - Geolocation API
+- useFetcher Hook (react-router v6.4)
 
 <!-- [Link to project](https://world-wise-nine-neon.vercel.app/) -->
