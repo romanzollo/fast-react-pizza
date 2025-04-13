@@ -48,7 +48,7 @@ function Order() {
     <div className="space-y-8 px-4 py-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 className="text-xl font-semibold">
-          Order #{id} status: {status}
+          Order №{id} status: {status}
         </h2>
 
         <div className="space-x-2">
